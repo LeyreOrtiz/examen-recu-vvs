@@ -16,6 +16,12 @@ class Pool
         if (!in_array($sign, self::SIGNS)) {
             return "Signo no válido";
         }
+
+        return $this->betMatch($match, $sign);
+    }
+
+    private function betMatch(string $match, string $sign): string
+    {
         $this->bets[$match] = $sign;
         $finalPool = [];
         foreach ($this->bets as $bet => $signBet) {
