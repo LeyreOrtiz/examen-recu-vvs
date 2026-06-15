@@ -4,5 +4,5 @@ namespace ExamenRecuVvs;
 
 interface Results
 {
-    public function getResultado(string $partido): ?string;
+    public function getResult(string $match): ?string;
 }

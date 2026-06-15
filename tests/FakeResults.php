@@ -12,7 +12,7 @@ class FakeResults implements Results
         $this->$matches = $matches;
     }
 
-    public function getResultado(string $match): ?string
+    public function getResult(string $match): ?string
     {
         if (isset($this->matches[strtolower($match)])) {
             return $this->matches[strtolower($match)];
@@ -20,5 +20,4 @@ class FakeResults implements Results
             return null;
         }
     }
-
 }
