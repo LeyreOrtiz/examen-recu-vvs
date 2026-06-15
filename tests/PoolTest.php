@@ -90,4 +90,21 @@ class PoolTest extends TestCase
         // Assert
         $this->assertEquals('españa-brasil: 1', $result);
     }
+
+    /**
+     * @test
+     */
+    public function givenDeleteMatchThatNotExistsInThePoolReturnsMessage()
+    {
+        // Arrange
+        $fakeResults = new FakeResults(['españa-brasil' => '1']);
+        $pool = new Pool($fakeResults);
+
+        // Act
+        $pool->handle('apostar españa-brasil 1');
+        $result = $pool->handle('quitar francia-alemania');
+
+        // Assert
+        $this->assertEquals('La apuesta seleccionada no existe', $result);
+    }
 }
