@@ -21,4 +21,20 @@ class PoolTest extends TestCase
         // Assert
         $this->assertEquals('españa-brasil: 1', $result);
     }
+
+    /**
+     * @test
+     */
+    public function givenABetWithASignThatNotExistsReturnsInvalidSign()
+    {
+
+        // Arrange
+        $pool = new Pool();
+
+        // Act
+        $result = $pool->handle('apostar españa-brasil: 3');
+
+        // Assert
+        $this->assertEquals('Signo no válido', $result);
+    }
 }

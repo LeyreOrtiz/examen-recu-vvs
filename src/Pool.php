@@ -4,7 +4,6 @@ namespace ExamenRecuVvs;
 
 class Pool
 {
-
     public function handle(string $instruction): string
     {
         $instructionSplitted = explode(' ', $instruction);
