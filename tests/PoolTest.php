@@ -124,4 +124,20 @@ class PoolTest extends TestCase
         // Assert
         $this->assertEquals('La quiniela está vacía', $result);
     }
+    /**
+     * @test
+     */
+    public function givenOneBetAndOneHitReturnsTheOneHit()
+    {
+        // Arrange
+        $fakeResults = new FakeResults(['españa-brasil' => '1']);
+        $pool = new Pool($fakeResults);
+
+        // Act
+        $pool->handle('apostar españa-brasil 1');
+        $result = $pool->handle('aciertos');
+
+        // Assert
+        $this->assertEquals('Aciertos: 1', $result);
+    }
 }
