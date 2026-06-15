@@ -24,6 +24,9 @@ class Pool
                 return 'La apuesta seleccionada no existe';
             }
             unset($this->bets[$match]);
+            if (empty($this->dishes)) {
+                return 'La quiniela está vacía';
+            }
         } elseif (strcasecmp($instructionAction, self::ACTION_BET) === 0) {
             if (!in_array($sign, self::SIGNS)) {
                 return "Signo no válido";
