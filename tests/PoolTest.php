@@ -13,8 +13,8 @@ class PoolTest extends TestCase
     public function givenABetThatExistWithTheCorrectFormatReturnsThePool()
     {
         // Arrange
-        //$fakeResults = new FakeResults(['españa-brasil' => '1']);
-        $pool = new Pool();
+        $fakeResults = new FakeResults(['españa-brasil' => '1']);
+        $pool = new Pool($fakeResults);
 
         // Act
         $result = $pool->handle('apostar españa-brasil 1');
@@ -28,9 +28,9 @@ class PoolTest extends TestCase
      */
     public function givenABetWithASignThatNotExistsReturnsInvalidSign()
     {
-
         // Arrange
-        $pool = new Pool();
+        $fakeResults = new FakeResults(['españa-brasil' => '1']);
+        $pool = new Pool($fakeResults);
 
         // Act
         $result = $pool->handle('apostar españa-brasil: 3');
@@ -45,7 +45,8 @@ class PoolTest extends TestCase
     public function givenABetThatExitsReturnsPoolUpdate()
     {
         // Arrange
-        $pool = new Pool();
+        $fakeResults = new FakeResults(['españa-brasil' => '1']);
+        $pool = new Pool($fakeResults);
 
         // Act
         $pool->handle('apostar españa-brasil 1');
@@ -61,7 +62,8 @@ class PoolTest extends TestCase
     public function givenTwoBetsReturnsThatTwoBets()
     {
         // Arrange
-        $pool = new Pool();
+        $fakeResults = new FakeResults(['españa-brasil' => '1']);
+        $pool = new Pool($fakeResults);
 
         // Act
         $pool->handle('apostar españa-brasil 1');
@@ -77,12 +79,13 @@ class PoolTest extends TestCase
     public function givenDeleteMatchReturnsPoolWithoutThatMatch()
     {
         // Arrange
-        $pool = new Pool();
+        $fakeResults = new FakeResults(['españa-brasil' => '1']);
+        $pool = new Pool($fakeResults);
 
         // Act
         $pool->handle('apostar españa-brasil 1');
         $pool->handle('apostar francia-alemania X');
-        $result = $pool->handle('eliminar francia-alemania');
+        $result = $pool->handle('quitar francia-alemania');
 
         // Assert
         $this->assertEquals('españa-brasil: 1', $result);
