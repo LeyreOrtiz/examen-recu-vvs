@@ -19,5 +19,4 @@ class ExampleTest extends TestCase
         // Assert
         $this->assertEquals('Hello World!', $result);
     }
-
 }
