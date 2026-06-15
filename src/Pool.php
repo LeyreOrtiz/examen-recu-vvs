@@ -7,6 +7,9 @@ class Pool
     private const ACTION_BET = 'apostar';
     private const ACTION_DELETE = 'quitar';
     private const SIGNS = ['1', '2', 'X'];
+    private const MSG_BET_NOT_EXISTS = 'La apuesta seleccionada no existe';
+    private const MSG_POOL_CLEARED = 'La quiniela está vacía';
+    private const MSG_INVALID_SIGN = 'Signo no válido';
     private array $bets = [];
     private Results $results;
     public function __construct(Results $results)
@@ -21,15 +24,15 @@ class Pool
         $sign = $instructionSplitted[2] ?? null;
         if (strcasecmp($instructionAction, self::ACTION_DELETE) === 0) {
             if (!isset($this->bets[$match])) {
-                return 'La apuesta seleccionada no existe';
+                return self::MSG_BET_NOT_EXISTS;
             }
             unset($this->bets[$match]);
-            if (empty($this->dishes)) {
-                return 'La quiniela está vacía';
+            if (empty($this->bets)) {
+                return self::MSG_POOL_CLEARED;
             }
         } elseif (strcasecmp($instructionAction, self::ACTION_BET) === 0) {
             if (!in_array($sign, self::SIGNS)) {
-                return "Signo no válido";
+                return self::MSG_INVALID_SIGN;
             }
             $this->betMatch($match, $sign);
         }
