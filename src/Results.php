@@ -1,6 +1,8 @@
 <?php
+
 namespace ExamenRecuVvs;
-interface Resultados
+
+interface Results
 {
     public function getResultado(string $partido): ?string;
 }
