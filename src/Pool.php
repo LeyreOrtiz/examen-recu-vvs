@@ -20,9 +20,10 @@ class Pool
         $match = $instructionSplitted[1] ?? null;
         $sign = $instructionSplitted[2] ?? null;
         if (strcasecmp($instructionAction, self::ACTION_DELETE) === 0) {
-            if (isset($this->bets[$match])) {
-                unset($this->bets[$match]);
+            if (!isset($this->bets[$match])) {
+                return 'La apuesta seleccionada no existe';
             }
+            unset($this->bets[$match]);
         } elseif (strcasecmp($instructionAction, self::ACTION_BET) === 0) {
             if (!in_array($sign, self::SIGNS)) {
                 return "Signo no válido";
