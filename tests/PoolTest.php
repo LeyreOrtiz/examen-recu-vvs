@@ -16,7 +16,7 @@ class PoolTest extends TestCase
         $pool = new Pool();
 
         // Act
-        $result = $pool->handle('apostar españa-brasil: 1');
+        $result = $pool->handle('apostar españa-brasil 1');
 
         // Assert
         $this->assertEquals('españa-brasil: 1', $result);
@@ -47,10 +47,26 @@ class PoolTest extends TestCase
         $pool = new Pool();
 
         // Act
-        $pool->handle('apostar españa-brasil: 1');
-        $result = $pool->handle('apostar españa-brasil: 2');
+        $pool->handle('apostar españa-brasil 1');
+        $result = $pool->handle('apostar españa-brasil 2');
 
         // Assert
         $this->assertEquals('españa-brasil: 2', $result);
+    }
+
+    /**
+     * @test
+     */
+    public function givenTwoBetsReturnsThatTwoBets()
+    {
+        // Arrange
+        $pool = new Pool();
+
+        // Act
+        $pool->handle('apostar españa-brasil 1');
+        $result = $pool->handle('apostar francia-alemania X');
+
+        // Assert
+        $this->assertEquals('españa-brasil: 1, francia-alemania: X', $result);
     }
 }

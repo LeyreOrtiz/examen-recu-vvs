@@ -19,7 +19,7 @@ class Pool
         $this->bets[$match] = $sign;
         $finalPool = [];
         foreach ($this->bets as $bet => $signBet) {
-            $finalPool[] = $bet . ' ' . $signBet;
+            $finalPool[] = $bet . ': ' . $signBet;
         }
 
         return implode(', ', $finalPool);
