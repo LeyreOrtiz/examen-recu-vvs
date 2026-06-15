@@ -26,13 +26,7 @@ class Pool
         $sign = $instructionSplitted[2] ?? null;
 
         if (strcasecmp($instructionAction, self::ACTION_HIT) === 0) {
-            $cont = 1;
-            foreach ($this->bets as $bet => $signBet) {
-                if ($this->results->getResult($bet) === $signBet) {
-                    $cont = $cont + 1;
-                }
-            }
-            return self::MSG_HITS . $cont;
+            return $this->hitsMatch();
         }
 
         if (strcasecmp($instructionAction, self::ACTION_DELETE) === 0) {
@@ -70,5 +64,16 @@ class Pool
         }
 
         return implode(', ', $finalPool);
+    }
+
+    private function hitsMatch(): string
+    {
+        $cont = 1;
+        foreach ($this->bets as $bet => $signBet) {
+            if ($this->results->getResult($bet) === $signBet) {
+                $cont = $cont + 1;
+            }
+        }
+        return self::MSG_HITS . $cont;
     }
 }
