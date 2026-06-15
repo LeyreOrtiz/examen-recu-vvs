@@ -5,6 +5,7 @@ namespace ExamenRecuVvs;
 class Pool
 {
     private const SIGNS = ['1', '2', 'X'];
+    private $bets = [];
     public function handle(string $instruction): string
     {
         $instructionSplitted = explode(' ', $instruction);
@@ -15,6 +16,12 @@ class Pool
         if (!in_array($sign, self::SIGNS)) {
             return "Signo no válido";
         }
-        return $match . ' ' . $sign;
+        $this->bets[$match] = $sign;
+        $finalPool = [];
+        foreach ($this->bets as $bet => $signBet) {
+            $finalPool[] = $bet . ' ' . $signBet;
+        }
+
+        return implode(', ', $finalPool);
     }
 }
