@@ -13,6 +13,7 @@ class PoolTest extends TestCase
     public function givenABetThatExistWithTheCorrectFormatReturnsThePool()
     {
         // Arrange
+        //$fakeResults = new FakeResults(['españa-brasil' => '1']);
         $pool = new Pool();
 
         // Act
@@ -68,5 +69,22 @@ class PoolTest extends TestCase
 
         // Assert
         $this->assertEquals('españa-brasil: 1, francia-alemania: X', $result);
+    }
+
+    /**
+     * @test
+     */
+    public function givenDeleteMatchReturnsPoolWithoutThatMatch()
+    {
+        // Arrange
+        $pool = new Pool();
+
+        // Act
+        $pool->handle('apostar españa-brasil 1');
+        $pool->handle('apostar francia-alemania X');
+        $result = $pool->handle('eliminar francia-alemania');
+
+        // Assert
+        $this->assertEquals('españa-brasil: 1', $result);
     }
 }

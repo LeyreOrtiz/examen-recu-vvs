@@ -6,6 +6,12 @@ class Pool
 {
     private const SIGNS = ['1', '2', 'X'];
     private $bets = [];
+    /*private Results $results;
+    public function __construct(Results $results)
+    {
+        $this->$results = $results;
+    }*/
+
     public function handle(string $instruction): string
     {
         $instructionSplitted = explode(' ', $instruction);
@@ -16,7 +22,6 @@ class Pool
         if (!in_array($sign, self::SIGNS)) {
             return "Signo no válido";
         }
-
         return $this->betMatch($match, $sign);
     }
 
