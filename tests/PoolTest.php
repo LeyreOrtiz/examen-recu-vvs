@@ -13,8 +13,7 @@ class PoolTest extends TestCase
     public function givenABetThatExistWithTheCorrectFormatReturnsThePool()
     {
         // Arrange
-        $fakeResult = new FakeResults(['españa-brasil' => 1]);
-        $pool = new Pool($fakeResult);
+        $pool = new Pool();
 
         // Act
         $result = $pool->handle('apostar españa-brasil: 1');

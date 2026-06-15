@@ -4,13 +4,13 @@ namespace ExamenRecuVvs;
 
 class Pool
 {
-    private Results $results;
-    public function __construct(Results $results)
-    {
-        $this->$results = $results;
-    }
+
     public function handle(string $instruction): string
     {
-        return 'Hola';
+        $instructionSplitted = explode(' ', $instruction);
+        $instructionAction = $instructionSplitted[0] ?? null;
+        $match = $instructionSplitted[1] ?? null;
+        $sign = $instructionSplitted[2] ?? null;
+        return $match . ' ' . $sign;
     }
 }
