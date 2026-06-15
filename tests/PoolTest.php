@@ -7,5 +7,4 @@ use PHPUnit\Framework\TestCase;
 class PoolTest extends TestCase
 {
 
-
 }
