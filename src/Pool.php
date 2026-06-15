@@ -23,13 +23,7 @@ class Pool
         $match = $instructionSplitted[1] ?? null;
         $sign = $instructionSplitted[2] ?? null;
         if (strcasecmp($instructionAction, self::ACTION_DELETE) === 0) {
-            if (!isset($this->bets[$match])) {
-                return self::MSG_BET_NOT_EXISTS;
-            }
-            unset($this->bets[$match]);
-            if (empty($this->bets)) {
-                return self::MSG_POOL_CLEARED;
-            }
+            return $this->deleteMatch($match);
         } elseif (strcasecmp($instructionAction, self::ACTION_BET) === 0) {
             if (!in_array($sign, self::SIGNS)) {
                 return self::MSG_INVALID_SIGN;
@@ -42,6 +36,17 @@ class Pool
     private function betMatch(string $match, string $sign): void
     {
         $this->bets[$match] = $sign;
+    }
+    private function deleteMatch(string $match): string
+    {
+        if (!isset($this->bets[$match])) {
+            return self::MSG_BET_NOT_EXISTS;
+        }
+        unset($this->bets[$match]);
+        if (empty($this->bets)) {
+            return self::MSG_POOL_CLEARED;
+        }
+        return $this->returnPool();
     }
 
     private function returnPool(): string
